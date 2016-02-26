@@ -1,0 +1,4 @@
+Feature list:
+1. setup a web server to allow any mobile phone in the same LAN to access
+2. In the web server, it included a page to allow user to write some content and can send to the server
+3. server can receive any content and save to the "Clicpboard" of the OS.
