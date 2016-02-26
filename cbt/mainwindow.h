@@ -7,6 +7,7 @@
 #include <QClipboard>
 #include <QStatusBar>
 #include <QTcpServer>
+#include <QString>
 
 namespace Ui {
 class MainWindow;
@@ -23,8 +24,8 @@ public:
 private slots:
     void handle_okButtonClicked();
     void handle_closeButtonClicked();
-
     void handle_newTcpConnect();
+    QString filterContent(QString requestStr);
 private:    
     void init();
 
