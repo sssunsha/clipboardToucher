@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include <QClipboard>
+#include <QStatusBar>
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +30,7 @@ private:
     QPushButton* m_closeButton;
     QPushButton* m_okButton;
     QTextEdit* m_contentTextEdit;
+    QStatusBar* m_statusBar;
 
     QClipboard *m_clipboard;
 };

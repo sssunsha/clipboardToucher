@@ -24,6 +24,7 @@ void MainWindow::init()
     this->m_okButton = ui->pushButton_ok;
     this->m_closeButton = ui->pushButton_close;
     this->m_contentTextEdit = ui->textEdit_content;
+    this->m_statusBar = ui->statusBar;
 
     // inin the signal and slots
     connect(this->m_okButton, SIGNAL(clicked()), this, SLOT(handle_okButtonClicked()));
@@ -42,6 +43,9 @@ void MainWindow::handle_okButtonClicked()
     if(str.length() > 0 && m_clipboard)
     {
         m_clipboard->setText(str);
+
+        // update the status bar
+        m_statusBar->showMessage(str + " saved", 1000);
     }
 }
 
