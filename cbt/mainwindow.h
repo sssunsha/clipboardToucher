@@ -6,6 +6,7 @@
 #include <QTextEdit>
 #include <QClipboard>
 #include <QStatusBar>
+#include <QTcpServer>
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,8 @@ public:
 private slots:
     void handle_okButtonClicked();
     void handle_closeButtonClicked();
+
+    void handle_newTcpConnect();
 private:    
     void init();
 
@@ -33,6 +36,9 @@ private:
     QStatusBar* m_statusBar;
 
     QClipboard *m_clipboard;
+
+    QTcpServer *m_server;
+
 };
 
 #endif // MAINWINDOW_H
