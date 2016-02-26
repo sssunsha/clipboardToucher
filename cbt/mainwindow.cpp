@@ -18,8 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
-    // set up title
-
+    this->setWindowTitle("Clipboard toucher");
     // inint cmp
     this->m_okButton = ui->pushButton_ok;
     this->m_closeButton = ui->pushButton_close;
