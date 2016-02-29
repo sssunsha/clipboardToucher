@@ -27,12 +27,9 @@ public:
 private slots:
     void handle_okButtonClicked();
     void handle_closeButtonClicked();
-    void handle_newTcpConnect();
-    QString filterContent(QString requestStr);
 private:    
     void init();
     QString searchConfigFile();
-    void service(HttpRequest &request, HttpResponse &response);
 
     Ui::MainWindow *ui;
 
@@ -42,8 +39,6 @@ private:
     QStatusBar* m_statusBar;
 
     QClipboard *m_clipboard;
-
-    QTcpServer *m_server;
 
     QSettings *m_setting;
 
