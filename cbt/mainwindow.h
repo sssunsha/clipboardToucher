@@ -8,6 +8,9 @@
 #include <QStatusBar>
 #include <QTcpServer>
 #include <QString>
+#include <QSettings>
+
+#include "httplistener.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +31,7 @@ private slots:
     QString filterContent(QString requestStr);
 private:    
     void init();
+    QString searchConfigFile();
 
     Ui::MainWindow *ui;
 
@@ -39,6 +43,10 @@ private:
     QClipboard *m_clipboard;
 
     QTcpServer *m_server;
+
+    QSettings *m_setting;
+
+    HttpListener* m_httpListener;
 
 };
 

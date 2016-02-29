@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QTcpSocket>
-
+#include <QDir>
 int TCPPORT = 9527;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -18,6 +18,9 @@ MainWindow::~MainWindow()
     delete ui;
     delete m_server;
     m_server = NULL;
+
+    delete m_setting;
+    delete m_httpListener;
 }
 
 
@@ -43,6 +46,24 @@ void MainWindow::init()
     // setup the tcp server connect and wait for the browser to connect with request
     connect(m_server, SIGNAL(newConnection()), this, SLOT(handle_newTcpConnect()));
 
+    QString iniFileName = searchConfigFile();
+
+    // load the ini file for QtWebApp
+    m_setting = new QSettings(iniFileName,QSettings::IniFormat,this);
+    m_setting->beginGroup("listener");
+    qDebug() << "settings keys : " << m_setting->childKeys().length();
+    if(m_setting->childKeys().length() > 0)
+    {
+        qDebug() << "config file loaded";
+    }
+    else
+    {
+        close();
+    }
+
+    // setup the server at port 8080
+    m_httpListener = new HttpListener(m_setting, new HttpRequestHandler(this), this);
+
     // set up the port to listen
     if(m_server->listen(QHostAddress::Any, TCPPORT))
     {
@@ -53,6 +74,47 @@ void MainWindow::init()
         qDebug() << "can not listen at port:" << TCPPORT;
          this->close();
     }
+}
+
+QString MainWindow::searchConfigFile()
+{
+//    QString appName = "cbt";
+    QString binDir=QCoreApplication::applicationDirPath();
+    QString appName=QCoreApplication::applicationName();
+    QString fileName(appName+".ini");
+
+    QStringList searchList;
+    searchList.append(binDir);
+    searchList.append(binDir+"/etc");
+    searchList.append(binDir+"/../etc");
+    searchList.append(binDir+"/../../etc"); // for development without shadow build
+    searchList.append(binDir+"/../"+appName+"/etc"); // for development with shadow build
+    searchList.append(binDir+"/../../"+appName+"/etc"); // for development with shadow build
+    searchList.append(binDir+"/../../../"+appName+"/etc"); // for development with shadow build
+    searchList.append(binDir+"/../../../../"+appName+"/etc"); // for development with shadow build
+    searchList.append(binDir+"/../../../../../"+appName+"/etc"); // for development with shadow build
+    searchList.append(QDir::rootPath()+"etc/opt");
+    searchList.append(QDir::rootPath()+"etc");
+
+    foreach (QString dir, searchList)
+    {
+        QFile file(dir+"/"+fileName);
+        if (file.exists())
+        {
+            // found
+            fileName=QDir(file.fileName()).canonicalPath();
+            qDebug("Using config file %s",qPrintable(fileName));
+            return fileName;
+        }
+    }
+
+    // not found
+    foreach (QString dir, searchList)
+    {
+        qWarning("%s/%s not found",qPrintable(dir),qPrintable(fileName));
+    }
+    qFatal("Cannot find config file %s",qPrintable(fileName));
+    return 0;
 }
 
 // private slots
