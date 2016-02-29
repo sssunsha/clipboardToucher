@@ -33,9 +33,9 @@ void httpServiceHandler::service(HttpRequest &request, HttpResponse &response)
 
      response.write("<html><body>");
      response.write("<form method=\"post\">");
-     response.write("  <input type=\"hidden\" name=\"action\" value=\"sendMessage\">");
-     response.write("  Name: <input type=\"text\" name=\"name\"><br>");
-     response.write("  <input type=\"submit\">");
+     response.write(" <H1><input style=\"font-size:150%;\" type=\"hidden\" name=\"action\" value=\"sendMessage\"></H1>");
+     response.write(" <H1> Name:</H1> <H1><input style=\"font-size:150%;\" type=\"text\" name=\"name\"></H1><br>");
+     response.write("  <H1><input style=\"font-size:150%;\" type=\"submit\"></H1>");
      response.write("</form>");
      response.write("</body></html>",true);
 }

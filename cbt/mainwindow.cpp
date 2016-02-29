@@ -4,6 +4,8 @@
 #include <QTcpSocket>
 #include <QDir>
 #include "httpservicehandler.h"
+#include <QHostInfo>
+#include <QNetworkInterface>
 
 int TCPPORT = 9527;
 
@@ -26,12 +28,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
-    this->setWindowTitle("Clipboard toucher");
+    this->setWindowTitle("Clipboard toucher");    
+
     // inint cmp
+    this->m_helpMessageLabel = ui->label_helpMessage;
     this->m_okButton = ui->pushButton_ok;
     this->m_closeButton = ui->pushButton_close;
     this->m_contentTextEdit = ui->textEdit_content;
     this->m_statusBar = ui->statusBar;
+
+    setHelpMessage();
 
     // inin the signal and slots
     connect(this->m_okButton, SIGNAL(clicked()), this, SLOT(handle_okButtonClicked()));
@@ -58,6 +64,23 @@ void MainWindow::init()
     {
         close();
     }
+}
+
+
+void MainWindow::setHelpMessage()
+{
+        // get the locate
+    QString welcome1Str = "欢迎使用“电脑小帮手.\n 本机IP地址是：";
+    QString portStr = " : 9527\n";
+    QString welcome2Str = "请打开手机浏览器，并输入上述IP地址使用。谢谢。";
+    QString ipAddress = "";
+
+    foreach (const QHostAddress &address, QNetworkInterface::allAddresses()) {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != QHostAddress(QHostAddress::LocalHost))
+            ipAddress = address.toString();
+    }
+
+    m_helpMessageLabel->setText(welcome1Str + ipAddress +  portStr + welcome2Str);
 }
 
 void MainWindow::setMessage(QString str)

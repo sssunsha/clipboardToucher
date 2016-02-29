@@ -9,6 +9,7 @@
 #include <QTcpServer>
 #include <QString>
 #include <QSettings>
+#include <QLabel>
 
 #include "httplistener.h"
 
@@ -29,6 +30,7 @@ private slots:
     void handle_closeButtonClicked();
 private:    
     void init();
+    void setHelpMessage();
     QString searchConfigFile();
 
     Ui::MainWindow *ui;
@@ -37,6 +39,7 @@ private:
     QPushButton* m_okButton;
     QTextEdit* m_contentTextEdit;
     QStatusBar* m_statusBar;
+    QLabel* m_helpMessageLabel;
 
     QClipboard *m_clipboard;
 
