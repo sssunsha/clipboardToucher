@@ -23,7 +23,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+    void setMessage(QString str);
 private slots:
     void handle_okButtonClicked();
     void handle_closeButtonClicked();
@@ -32,6 +32,7 @@ private slots:
 private:    
     void init();
     QString searchConfigFile();
+    void service(HttpRequest &request, HttpResponse &response);
 
     Ui::MainWindow *ui;
 
@@ -47,6 +48,8 @@ private:
     QSettings *m_setting;
 
     HttpListener* m_httpListener;
+
+    QString m_message;
 
 };
 

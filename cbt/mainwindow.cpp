@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QTcpSocket>
 #include <QDir>
+#include "httpservicehandler.h"
+
 int TCPPORT = 9527;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -55,14 +57,15 @@ void MainWindow::init()
     if(m_setting->childKeys().length() > 0)
     {
         qDebug() << "config file loaded";
+
+        // setup the server at port 8080
+        m_httpListener = new HttpListener(m_setting, new httpServiceHandler(this), this);
+
     }
     else
     {
         close();
     }
-
-    // setup the server at port 8080
-    m_httpListener = new HttpListener(m_setting, new HttpRequestHandler(this), this);
 
     // set up the port to listen
     if(m_server->listen(QHostAddress::Any, TCPPORT))
@@ -74,6 +77,22 @@ void MainWindow::init()
         qDebug() << "can not listen at port:" << TCPPORT;
          this->close();
     }
+}
+
+void MainWindow::setMessage(QString str)
+{
+    if(str.length() > 0)
+    {
+
+        // do the URL decode for Chinese
+        QByteArray text = str.toUtf8();
+        qDebug() <<"str.toUtf8() --->" << str.toUtf8();
+        m_message = QString(text.toPercentEncoding());
+
+        // set the clipboard
+        this->m_clipboard->setText(m_message);
+    }
+
 }
 
 QString MainWindow::searchConfigFile()
@@ -136,6 +155,15 @@ void MainWindow::handle_closeButtonClicked()
 {
     this->close();
 }
+
+
+
+void MainWindow::service(HttpRequest &request, HttpResponse &response)
+{
+    qDebug() << "----------------------------";
+ response.write("Hello World",true);
+}
+
 
 void MainWindow::handle_newTcpConnect()
 {
