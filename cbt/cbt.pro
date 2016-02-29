@@ -24,7 +24,7 @@ FORMS    += mainwindow.ui
 RESOURCES += \
     cbt.qrc
 
-include(../../QtWebApp-src/QtWebApp/httpserver/httpserver.pri)
+include(..//httpserver/httpserver.pri)
 
 DISTFILES += \
     etc/cbt.ini
