@@ -87,16 +87,11 @@ void MainWindow::setHelpMessage()
 void MainWindow::setMessage(QString str)
 {
     if(str.length() > 0)
-    {
-
+    {    
         // do the URL decode for Chinese
-        QByteArray text = str.toUtf8();
-        qDebug() <<"str.toUtf8() --->" << str.toUtf8();
-        m_message = QString(text.toPercentEncoding());
-
+        QByteArray text = str.toUtf8();        
+        m_message = QString(QByteArray::fromPercentEncoding(text));
         emit messageChanged();
-        // set the clipboard
-//        this->m_clipboard->setText(m_message);
     }
 
 }

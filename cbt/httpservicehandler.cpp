@@ -15,7 +15,7 @@ void httpServiceHandler::service(HttpRequest &request, HttpResponse &response)
 //    response.write("Hello World",true);
 
 
-    response.setHeader("Content-Type", "text/html; charset=ISO-8859-1");
+    response.setHeader("Content-Type", "text/html; charset=utf-8");
 
      if (request.getParameter("action")=="sendMessage")
      {
@@ -34,8 +34,8 @@ void httpServiceHandler::service(HttpRequest &request, HttpResponse &response)
      response.write("<html><body>");
      response.write("<form method=\"post\">");
      response.write(" <H1><input style=\"font-size:150%;\" type=\"hidden\" name=\"action\" value=\"sendMessage\"></H1>");
-     response.write(" <H1> Name:</H1> <H1><input style=\"font-size:150%;\" type=\"text\" name=\"name\"></H1><br>");
-     response.write("  <H1><input style=\"font-size:150%;\" type=\"submit\"></H1>");
+     response.write(" <H1> 输入点啥吧：</H1> <H1><input style=\"font-size:150%;\" type=\"text\" name=\"name\"></H1><br>");
+     response.write("  <H1><input style=\"font-size:150%;\" type=\"submit\" value=\"确定\"></H1>");
      response.write("</form>");
      response.write("</body></html>",true);
 }
