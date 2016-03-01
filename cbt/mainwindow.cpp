@@ -33,8 +33,11 @@ void MainWindow::init()
     // inint cmp
     this->m_helpMessageLabel = ui->label_helpMessage;
     this->m_okButton = ui->pushButton_ok;
+    this->m_okButton->setText("确定(ok)");
     this->m_closeButton = ui->pushButton_close;
+    this->m_closeButton->setText("退出(quit)");
     this->m_contentTextEdit = ui->textEdit_content;
+    ui->label_content->setText("输入点什么吧(keywords)：");
     this->m_statusBar = ui->statusBar;
 
     setHelpMessage();
