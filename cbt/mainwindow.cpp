@@ -42,6 +42,7 @@ void MainWindow::init()
     // inin the signal and slots
     connect(this->m_okButton, SIGNAL(clicked()), this, SLOT(handle_okButtonClicked()));
     connect(this->m_closeButton, SIGNAL(clicked()), this, SLOT(handle_closeButtonClicked()));
+    connect(this, SIGNAL(messageChanged()), this, SLOT(handle_messageChanged()));
 
     // setup clipboard
     this->m_clipboard = QApplication::clipboard();
@@ -93,8 +94,9 @@ void MainWindow::setMessage(QString str)
         qDebug() <<"str.toUtf8() --->" << str.toUtf8();
         m_message = QString(text.toPercentEncoding());
 
+        emit messageChanged();
         // set the clipboard
-        this->m_clipboard->setText(m_message);
+//        this->m_clipboard->setText(m_message);
     }
 
 }
@@ -158,4 +160,9 @@ void MainWindow::handle_okButtonClicked()
 void MainWindow::handle_closeButtonClicked()
 {
     this->close();
+}
+
+void MainWindow::handle_messageChanged()
+{
+    this->m_clipboard->setText(m_message);
 }

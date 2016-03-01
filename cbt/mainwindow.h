@@ -28,6 +28,9 @@ public:
 private slots:
     void handle_okButtonClicked();
     void handle_closeButtonClicked();
+    void handle_messageChanged();
+Q_SIGNALS:
+    void messageChanged();
 private:    
     void init();
     void setHelpMessage();
