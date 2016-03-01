@@ -6,6 +6,8 @@
 
 QT       += core gui network
 
+DEFINES += QT_NO_DEBUG_OUTPUT
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = cbt
