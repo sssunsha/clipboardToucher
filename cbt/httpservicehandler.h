@@ -12,6 +12,7 @@ public:
     httpServiceHandler(QObject* parent=0);
     void service(HttpRequest& request, HttpResponse& response);
 private:
+    bool loadHtmlFile();
     MainWindow* m_mainwindow;
 };
 

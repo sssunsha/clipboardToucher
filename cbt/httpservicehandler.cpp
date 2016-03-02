@@ -8,6 +8,14 @@ httpServiceHandler::httpServiceHandler(QObject* parent)
     m_mainwindow = ( MainWindow*)parent;
 }
 
+
+// load the local index html web file, if return false it means loaded failed
+bool httpServiceHandler::loadHtmlFile()
+{
+    return false;
+}
+
+
 void httpServiceHandler::service(HttpRequest &request, HttpResponse &response)
 {
     QByteArray path=request.getPath();
