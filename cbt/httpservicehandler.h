@@ -2,6 +2,7 @@
 #define HTTPSERVICEHANDLER_H
 
 #include <QObject>
+#include <QString>
 #include "httprequesthandler.h"
 #include "mainwindow.h"
 
@@ -14,6 +15,8 @@ public:
 private:
     bool loadHtmlFile();
     MainWindow* m_mainwindow;
+    QByteArray m_htmlFile;
+    bool m_isHaveHtmlFile;
 };
 
 #endif // HTTPSERVICEHANDLER_H
