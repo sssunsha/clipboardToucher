@@ -1,13 +1,26 @@
 <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <title>Clipboard Toucher</title>
+            <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css">
+            <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>	
 	<body>
-            <form method="post">
-            <H1><input style="font-size:150%;" type="hidden" name="action" value="sendMessage"></H1>
-            <H1> 输入点啥吧：</H1> <H1><input style="font-size:150%;" type="text" name="name"></H1><br>
-            <H1><input style="font-size:150%;" type="submit" value="确定"></H1>
-            </form>
+            <div data-role="page" data-theme="e">
+
+                <div data-role="header" data-theme="a">
+                            <h1>Clipboard Toucher</h1>
+                </div><!-- /header -->
+
+                <div data-role="content">
+                <form method="post">
+                <H1><input style="font-size:150%;" type="hidden" name="action" value="sendMessage"></H1>
+                <H1> 输入点啥吧：</H1> <H1><input data-theme="c" style="font-size:150%;" type="text" name="name"></H1><br>
+                <H1><input data-theme="a" style="font-size:150%;" type="submit" value="确定"></H1>
+                </form>
+
+                </div>
+           </div>
 	</body>
 </html>
