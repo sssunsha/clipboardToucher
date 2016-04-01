@@ -1,0 +1,9 @@
+Version 1.0
+1. With the server in the target pc, can receive the request from smartphone to set the clipboard of the target pc
+2. The phone or table with browser can access the web server, and set the content to the clipboard
+
+
+version 2.0
+1. can show the smartphone's screen to the pc
+
+

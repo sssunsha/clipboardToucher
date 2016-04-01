@@ -29,6 +29,7 @@ private slots:
     void handle_okButtonClicked();
     void handle_closeButtonClicked();
     void handle_messageChanged();
+    void handle_screenshotButtonClicked();
 Q_SIGNALS:
     void messageChanged();
 private:    
@@ -40,6 +41,7 @@ private:
 
     QPushButton* m_closeButton;
     QPushButton* m_okButton;
+    QPushButton* m_screenshotButton;
     QTextEdit* m_contentTextEdit;
     QStatusBar* m_statusBar;
     QLabel* m_helpMessageLabel;

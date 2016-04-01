@@ -6,6 +6,11 @@
 #include "httpservicehandler.h"
 #include <QHostInfo>
 #include <QNetworkInterface>
+#include <QPixmap>
+#include <QBuffer>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QScreen>
 
 int TCPPORT = 9527;
 
@@ -39,12 +44,14 @@ void MainWindow::init()
     this->m_contentTextEdit = ui->textEdit_content;
     ui->label_content->setText("输入点什么吧(keywords)：");
     this->m_statusBar = ui->statusBar;
+    this->m_screenshotButton = ui->pushButton_screenshot;
 
     setHelpMessage();
 
     // inin the signal and slots
     connect(this->m_okButton, SIGNAL(clicked()), this, SLOT(handle_okButtonClicked()));
     connect(this->m_closeButton, SIGNAL(clicked()), this, SLOT(handle_closeButtonClicked()));
+    connect(this->m_screenshotButton, SIGNAL(clicked()), this, SLOT(handle_screenshotButtonClicked()));
     connect(this, SIGNAL(messageChanged()), this, SLOT(handle_messageChanged()));
 
     // setup clipboard
@@ -163,4 +170,14 @@ void MainWindow::handle_closeButtonClicked()
 void MainWindow::handle_messageChanged()
 {
     this->m_clipboard->setText(m_message);
+}
+
+void MainWindow::handle_screenshotButtonClicked()
+{
+    QScreen *screen = QGuiApplication::primaryScreen();
+    if (screen)
+    {
+        QPixmap pixmap = screen->grabWindow(QApplication::desktop()->winId());
+        pixmap.save("clipboardToucher_screenshot.png", "png");
+    }
 }
