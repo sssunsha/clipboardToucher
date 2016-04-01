@@ -29,4 +29,5 @@ RESOURCES += \
 include(..//httpserver/httpserver.pri)
 
 DISTFILES += \
-    etc/cbt.ini
+    etc/cbt.ini \
+    etc/Use_Case.txt
